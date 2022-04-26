@@ -213,8 +213,9 @@ int q1(char data[])
 DiasMesesAnos q2(char datainicial[], char datafinal[])
 {
 
-    //calcule os dados e armazene nas três variáveis a seguir
     DiasMesesAnos dma;
+    DataQuebrada dqi,dqf;
+    int i;
 
     if (q1(datainicial) == 0){
       dma.retorno = 2;
@@ -223,17 +224,113 @@ DiasMesesAnos q2(char datainicial[], char datafinal[])
       dma.retorno = 2;
       return dma;
     }else{
-      //verifique se a data final não é menor que a data inicial
-      
-      //calcule a distancia entre as datas
+
+      dqi = quebraData(datainicial);
+      dqf = quebraData(datafinal);
+
+      if(dqi.iAno>dqf.iAno){
+        dma.retorno=4;
+        dma.qtdAnos=0;
+        dma.qtdMeses=0;
+        dma.qtdDias=0;
+        return dma;
+      }else if(dqi.iAno==dqf.iAno && dqi.iMes>dqf.iMes){
+        dma.retorno=4;
+        dma.qtdAnos=0;
+        dma.qtdMeses=0;
+        dma.qtdDias=0;
+        return dma;
+      }else if(dqi.iAno==dqf.iAno && dqi.iMes==dqf.iMes && dqi.iDia>dqf.iDia){
+        dma.retorno=4;
+        dma.qtdAnos=0;
+        dma.qtdMeses=0;
+        dma.qtdDias=0;
+        return dma;
+      }else{
+
+        dma.qtdAnos=dqf.iAno-dqi.iAno;
+        dma.qtdMeses=dqf.iMes-dqi.iMes;
+        dma.qtdDias=dqf.iDia-dqi.iDia;
+
+        
+
+        if(dma.qtdMeses<0){
+          dma.qtdAnos=dma.qtdAnos-1;
+          dma.qtdMeses=dma.qtdMeses+12;
+        }
+
+        if(dma.qtdDias<0 && dma.qtdMeses>0){
+          dma.qtdMeses=dma.qtdMeses-1;
+          dma.qtdDias=dma.qtdDias+30;
+        }else if(dma.qtdDias<0 && dma.qtdMeses==0){
+          dma.qtdAnos=dma.qtdAnos-1;
+          dma.qtdMeses=dma.qtdMeses+11;
+          dma.qtdDias=dma.qtdDias+30;
+        }
 
 
-      //se tudo der certo
-      dma.retorno = 1;
-      return dma;
+  
+        if((dqf.iAno!=dqi.iAno) && (dqf.iMes!=dqi.iMes) &&(dqf.iMes>dqi.iMes)){
+          for(i=dqf.iMes-1; i>0 && i>=dqi.iMes;i--){
+            if((i==1 || i==3 || i==5 || i==7 || i==8 || i==10)){
+              dma.qtdDias=dma.qtdDias+1;
+
+            }else if(i==2){
+                if ( ( dqf.iAno % 4 == 0 && dqf.iAno%100 != 0 ) || dqf.iAno% 400 == 0 )
+                  dma.qtdDias=dma.qtdDias-1;
+                else
+                  dma.qtdDias=dma.qtdDias-2;
+              }
+          }
+
+          
+          for(i=dqi.iMes+1;i<dqf.iMes;i++){
+            if((i==1 || i==3 || i==5 || i==7 || i==8 || i==10|| i==12)){
+              dma.qtdDias=dma.qtdDias+1;
+
+            }else if(i==2){
+                if ( ( dqi.iAno % 4 == 0 && dqi.iAno%100 != 0 ) || dqi.iAno% 400 == 0 )
+                  dma.qtdDias=dma.qtdDias-1;
+                else
+                  dma.qtdDias=dma.qtdDias-2;
+            }
+          }
+         
+          
+        }
+
+        if((dqf.iAno==dqi.iAno) && (dqf.iMes!=dqi.iMes) &&(dqf.iMes>dqi.iMes)){
+          for(i=dqf.iMes-1; i>0 && i>=dqi.iMes;i--){
+            if((i==1 || i==3 || i==5 || i==7 || i==8 || i==10)){
+              dma.qtdDias=dma.qtdDias+1;
+            }else if(i==2){
+                if ( ( dqf.iAno % 4 == 0 && dqf.iAno%100 != 0 ) || dqf.iAno% 400 == 0 )
+                  dma.qtdDias=dma.qtdDias-1;
+                else
+                  dma.qtdDias=dma.qtdDias-2;
+              }
+          }
+
+          
+       
+          
+        }
+
+               
+
+
+
+
+        dma.retorno = 1;
+        return dma;
+
+        
+
+
+        
+      }
       
-    }
-    
+      } 
 }
 
 /*
