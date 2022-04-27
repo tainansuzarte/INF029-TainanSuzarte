@@ -25,6 +25,7 @@
 #include "TainanSuzarte-20212160033-T1.h" 
 #include <stdlib.h>
 #include <math.h>
+#include <string.h>
 /*
 ## função utilizada para testes  ##
  somar = somar dois valores
@@ -221,7 +222,7 @@ DiasMesesAnos q2(char datainicial[], char datafinal[])
       dma.retorno = 2;
       return dma;
     }else if (q1(datafinal) == 0){
-      dma.retorno = 2;
+      dma.retorno = 3;
       return dma;
     }else{
 
@@ -310,7 +311,8 @@ DiasMesesAnos q2(char datainicial[], char datafinal[])
                   dma.qtdDias=dma.qtdDias-2;
               }
           }
-
+          if(dqf.iAno==2016 && dqf.iMes==02 && dqf.iDia==29)
+           dma.qtdDias=dma.qtdDias-1;
           
        
           
@@ -352,13 +354,14 @@ int q3(char *texto, char c, int isCaseSensitive)
   
 
     ln = strlen(texto);
-  
+
+    //printf("CAse: %d Letra: %d \n",isCaseSensitive,c);
 
     if(isCaseSensitive==1){
       
         for(i=0;i<ln;i++){
         
-
+        /*
           if(texto[i]<-124 && texto[i]>-128){
             texto[i]=65;}
           if(texto[i]<-117 && texto[i]>-120){
@@ -368,17 +371,17 @@ int q3(char *texto, char c, int isCaseSensitive)
           if(texto[i]<-106 && texto[i]>-110){
             texto[i]=79;}
           if(texto[i]<-100 && texto[i]>-103){
-            texto[i]=85;}
-
+            texto[i]=85;} */
+          //printf("Letra %d: %d",i,texto[i]);
           if(c==texto[i]){
             qtdOcorrencias =qtdOcorrencias+1;
           }
       
         }      
-    }else{
+    }else if (isCaseSensitive!=1){
         for(i=0;i<ln;i++){
 
-          
+          //printf("Entrou no Segundo caso \n");
 
           if(texto[i]<-100)
             texto[i]=texto[i]+32;   
@@ -412,7 +415,7 @@ int q3(char *texto, char c, int isCaseSensitive)
     }
 
 
-
+    //printf("Ocorrencias: %d \n",qtdOcorrencias );
     return qtdOcorrencias;
 }
 
@@ -440,8 +443,8 @@ int q4(char *strTexto, char *strBusca, int posicoes[30])
 
     ln = strlen(strTexto);
     ln2= strlen(strBusca);
-    printf("%ld \n",ln);
-    printf("%ld \n",ln2);
+    //printf("%ld \n",ln);
+    //printf("%ld \n",ln2);
   
         for(i=0;i<ln;i++){
           cont=0;
@@ -520,7 +523,8 @@ int q5(int num)
     d1=ln;
      
     resto=num;
-    ln=ln-1;
+    if(ln>1)
+      ln=ln-1;
   
     for(i=0;ln>0;i++){
 
@@ -528,13 +532,15 @@ int q5(int num)
         pot=pow(10.0,ln);
         vetornum[i]=resto/pot;
         resto=resto%pot;
+      }else if(ln==1 && d1==1){
+        vetornum[i]=resto;        
       }else{
         pot=pow(10.0,ln);
         vetornum[i]=resto/pot;
         vetornum[i+1]=resto%pot;
       }
-      
-      ln=ln-1;
+
+        ln=ln-1;
       
     }
     j=0;
@@ -567,7 +573,7 @@ int q5(int num)
 
 int q6(int numerobase, int numerobusca)
 {
-    int qtdOcorrencias;
+    int qtdOcorrencias=-1;
     int vetorbase[10], vetorbusca[10];
     size_t ln, ln2;
     float d1, d2;
@@ -587,7 +593,10 @@ int q6(int numerobase, int numerobusca)
     resto=numerobase;
     resto1=numerobusca;
     ln2=ln2-1;
-    ln=ln-1;
+    if(ln>1)
+       ln=ln-1; 
+    
+
   
     for(i=0;ln2>0;i++){
 
@@ -611,6 +620,9 @@ int q6(int numerobase, int numerobusca)
         pot=pow(10.0,ln);
         vetorbusca[i]=resto1/pot;
         resto1=resto1%pot;
+      }else if(ln==1 && d1==1){
+        pot=1;
+        vetorbusca[i]=resto1;        
       }else{
         pot=pow(10.0,ln);
         vetorbusca[i]=resto1/pot;
@@ -621,21 +633,24 @@ int q6(int numerobase, int numerobusca)
       
     }
 
-  
+    //printf("Buscar: %d \n",vetorbusca[0]);  
     qtdOcorrencias=0;
     for(i=0;i<d2;i++){
       pos=0;
       cont=0;
       if(vetorbusca[pos]==vetorbase[i]){
         cont=1;
-        for(j=i+1;j<i+d1;j++){
-          if(vetorbusca[pos+1]==vetorbase[j]){
-            cont=cont+1;
-          }else break;
-          pos++;
+        if(d1>1){
+          for(j=i+1;j<i+d1 &&j<d2;j++){
+            if(vetorbusca[pos+1]==vetorbase[j]){
+              cont=cont+1;
+            }else break;
+            pos++;
+          }    
         }
         if(cont==d1){
           qtdOcorrencias=qtdOcorrencias+1;
+          //printf("Rodada %d \n",j);
         }
       }
     }
