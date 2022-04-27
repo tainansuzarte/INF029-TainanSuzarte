@@ -3,7 +3,7 @@
 #include <string.h>
 #include <math.h>
 
-void teste(char *texto, char c, int isCaseSensitive){
+int q3(char *texto, char c, int isCaseSensitive){
 
     size_t ln;
     int i;
@@ -14,10 +14,11 @@ void teste(char *texto, char c, int isCaseSensitive){
   
 
     if(isCaseSensitive==1){
-      
+
+      printf("Letra: %d \n",c);
         for(i=0;i<ln;i++){
           
-          printf("%d \n",texto[i]);
+         /* 
           if(texto[i]<-124 && texto[i]>-128){
             texto[i]=65;}
           if(texto[i]<-117 && texto[i]>-120){
@@ -27,7 +28,9 @@ void teste(char *texto, char c, int isCaseSensitive){
           if(texto[i]<-106 && texto[i]>-110){
             texto[i]=79;}
           if(texto[i]<-100 && texto[i]>-103){
-            texto[i]=85;}
+            texto[i]=85;} */
+
+          printf("%d \n",texto[i]);
 
           if(c==texto[i]){
             qtdOcorrencias =qtdOcorrencias+1;
@@ -71,15 +74,23 @@ void teste(char *texto, char c, int isCaseSensitive){
     }
 
 
-    printf("Quantidade de Ocorrencias : %d",qtdOcorrencias);
+    printf("Quantidade de Ocorrencias  : %d\n",qtdOcorrencias);
+  return qtdOcorrencias;
 
 }
 
 int main(void){
  
   char str[250];
-  strcpy(str, "aÁÃÂa EÉÊ IÍ OÓÕÔ UÚÛ");
-  teste(str, 'O', 1);
+    strcpy(str,"Letícia signifiCa fEliCIdADE");
+    printf("%d\n",q3(str, 'S', 1) == 0);
+    //printf("%d\n",q3(str, 'C', 0) == 3);
+   // printf("%d\n",q3(str, 'c', 1) == 1);
+   // printf("%d\n",q3(str, 'C', 1) == 2);
+   // printf("%d\n",q3(str, 'R', 0) == 0);
+   // printf("%d\n",q3(str, 'e', 0) == 3);
+   // printf("%d\n",q3(str, 'E', 1) == 2);
+   // printf("%d\n",q3(str, 'S', 1) == 0);
   
   
   getchar();

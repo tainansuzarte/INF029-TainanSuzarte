@@ -19,11 +19,11 @@ int main(){
     //prindtf("q3\n");
     testQ3(); // 13 testes
     //prdintf("q4\n");
-    testQ4(); // 22 testes
+   testQ4(); // 22 testes
     //prdintf("q5\n");
-    testQ5(); // 10 testes
+   testQ5(); // 10 testes
     //prdintf("q6\n");
-    testQ6(); // 10 testes 
+   testQ6(); // 10 testes 
     
     
 }
@@ -187,14 +187,14 @@ void testQ2(){
 
 void testQ3(){
     char str[250];
-    printf("----Teste 3.1----\n");
-    strcpy(str,"Renato Lima Novais");
+    
+    strcpy(str,"Renato Líma Novais");
     printf("%d\n",q3(str, 'a', 0) == 3);
     printf("%d\n",q3(str, 'b', 0) == 0);
     printf("%d\n",q3(str, 'l', 1) == 0);
     printf("%d\n",q3(str, 'l', 0) == 1);
     printf("%d\n",q3(str, 'L', 0) == 1);
-    printf("----Teste 3.2----\n");
+    
     strcpy(str,"Letícia signifiCa fEliCIdADE");
     printf("%d\n",q3(str, 'c', 0) == 3);
     printf("%d\n",q3(str, 'C', 0) == 3);
@@ -216,7 +216,7 @@ void testQ4(){
     for (i = 0; i<30; i++){
         posicoes[i] = -1;
     }
-    printf("----Teste 4----\n");
+    //printf("----Teste 4----\n");
     strcpy(strTexto,"Laboratorio de programacao: para ratos de programação");
     strcpy(strBusca,"rato");
     printf("%d\n",q4(strTexto, strBusca, posicoes) == 2);
@@ -265,7 +265,7 @@ void testQ4(){
 
 
 void testQ5(){
-    printf("----Teste 5----\n");
+    //printf("----Teste 5----\n");
     printf("%d\n",q5(345) == 543);
     printf("%d\n",q5(78) == 87);
     printf("%d\n",q5(3) == 3);
@@ -279,13 +279,13 @@ void testQ5(){
 }
 
 void testQ6(){
-    printf("----Teste 6----\n");
+    //printf("----Teste 6----\n");
     printf("%d\n",q6(34567368, 3) == 2);
     printf("%d\n",q6(34567368, 4576) == 0);
     printf("%d\n",q6(3539343, 3) == 4);
     printf("%d\n",q6(3539343, 39) == 1);
-    printf("%d\n",q6(5444, 44) == 2);
-    printf("%d\n",q6(54444, 44) == 3);
+    printf("%d\n",q6(5444, 44) == 1);
+    printf("%d\n",q6(54444, 44) == 2);
     printf("%d\n",q6(1234562354, 23) == 2);
     printf("%d\n",q6(1234, 13) == 0);
     printf("%d\n",q6(544444, 4) == 5);

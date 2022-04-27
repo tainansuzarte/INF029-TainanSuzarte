@@ -26,6 +26,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
+#include <ctype.h>
 /*
 ## função utilizada para testes  ##
  somar = somar dois valores
@@ -184,14 +185,13 @@ int q1(char data[])
       
 
       
-   printf("%s - ", data);
+   //printf("%s - ", data);
 
     if(datavalida>0){
-        printf("Data Valida! \n");
-        return 1;}
-    else{
-        printf("Data Invalida \n");
-        return 0;}
+        printf(" ");
+        return 1;
+     }else
+        return 0;
 
 }
 
@@ -335,6 +335,13 @@ DiasMesesAnos q2(char datainicial[], char datafinal[])
       } 
 }
 
+void converteMaiusculo(char textoOriginal[], char textoDestino[]){
+  for (int i = 0; i < strlen(textoOriginal); i++){
+    textoDestino[i] = toupper(textoOriginal[i]);  
+  }
+  
+}
+
 /*
  Q3 = encontrar caracter em texto
  @objetivo
@@ -345,9 +352,11 @@ DiasMesesAnos q2(char datainicial[], char datafinal[])
  @saida
     Um número n >= 0.
  */
+
+
 int q3(char *texto, char c, int isCaseSensitive)
 {
-
+    char textoCopia[100];
     size_t ln;
     int i;
     int qtdOcorrencias = 0;
@@ -355,64 +364,75 @@ int q3(char *texto, char c, int isCaseSensitive)
 
     ln = strlen(texto);
 
+    if(!isCaseSensitive){
+      converteMaiusculo(texto, textoCopia);
+      c = toupper(c);
+    }  
+    else
+      strcpy(textoCopia, texto);  
+
+    
+  
+  
+    for(i=0;i<ln;i++){
+      //printf("Letra %d: %d \n",i,textoCopia[i]);
+      if(c==textoCopia[i]){
+        qtdOcorrencias =qtdOcorrencias+1;
+      }
+    }  
+    //printf("%d", qtdOcorrencias);
+    
+
+  
     //printf("CAse: %d Letra: %d \n",isCaseSensitive,c);
 
-    if(isCaseSensitive==1){
-      
+    /*if(isCaseSensitive==1){
+        printf("Entrou no Primeiro caso \n");
         for(i=0;i<ln;i++){
         
-        /*
-          if(texto[i]<-124 && texto[i]>-128){
-            texto[i]=65;}
-          if(texto[i]<-117 && texto[i]>-120){
-            texto[i]=69;}
-          if(texto[i]==-115){
-            texto[i]=73;}
-          if(texto[i]<-106 && texto[i]>-110){
-            texto[i]=79;}
-          if(texto[i]<-100 && texto[i]>-103){
-            texto[i]=85;} */
-          //printf("Letra %d: %d",i,texto[i]);
+
+          printf("Letra %d: %d \n",i,texto[i]);
           if(c==texto[i]){
             qtdOcorrencias =qtdOcorrencias+1;
           }
       
         }      
     }else if (isCaseSensitive!=1){
+        printf("Entrou no Segundo caso \n");
         for(i=0;i<ln;i++){
 
-          //printf("Entrou no Segundo caso \n");
+          strcpy(textoCopia,texto);
+            printf("Letra %d: %d \n",i,textoCopia[i]);
+          if(textoCopia[i]<-100)
+            textoCopia[i]=textoCopia[i]+32;   
 
-          if(texto[i]<-100)
-            texto[i]=texto[i]+32;   
-
-          if(texto[i]<=-93 && texto[i]>-96){
-            texto[i]=97;}
-          if(texto[i]<-85 && texto[i]>-88){
-            texto[i]=101;}
-          if(texto[i]==-83){
-            texto[i]=105;}
-          if(texto[i]<-74 && texto[i]>-78){
-            texto[i]=111;}
-          if(texto[i]<-68 && texto[i]>-71){
-            texto[i]=117;}
+          if(textoCopia[i]<=-93 && textoCopia[i]>-96){
+            textoCopia[i]=97;}
+          if(textoCopia[i]<-85 && textoCopia[i]>-88){
+            textoCopia[i]=101;}
+          if(textoCopia[i]==-83){
+            textoCopia[i]=105;}
+          if(textoCopia[i]<-74 && textoCopia[i]>-78){
+            textoCopia[i]=111;}
+          if(textoCopia[i]<-68 && textoCopia[i]>-71){
+            textoCopia[i]=117;}
           
 
           if(c>96)
             c=c-32;
           
-          if(texto[i]>96){
-            texto[i]=texto[i]-32;
+          if(textoCopia[i]>96){
+            textoCopia[i]=textoCopia[i]-32;
           }
           
-          if(c==texto[i]){
+          if(c==textoCopia[i]){
             qtdOcorrencias =qtdOcorrencias+1;
           }
       
         } 
 
       
-    }
+    }*/
 
 
     //printf("Ocorrencias: %d \n",qtdOcorrencias );
@@ -488,6 +508,8 @@ int q4(char *strTexto, char *strBusca, int posicoes[30])
               posicoes[z]=i+1-acento;
               posicoes[z+1]=j-acento;
               z=z+2;
+              if(ln2>1)
+                i=j-1;
             }
           }
       
@@ -578,7 +600,7 @@ int q6(int numerobase, int numerobusca)
     size_t ln, ln2;
     float d1, d2;
     int pos, fila,cont;
-    int resto, resto1, i, j ,pot;
+    int resto, resto1, i, j ,pot,f;
     char tam1[10],tam2[10];
   
 
@@ -632,14 +654,16 @@ int q6(int numerobase, int numerobusca)
       ln=ln-1;
       
     }
-
+    
     //printf("Buscar: %d \n",vetorbusca[0]);  
     qtdOcorrencias=0;
     for(i=0;i<d2;i++){
       pos=0;
       cont=0;
+      
       if(vetorbusca[pos]==vetorbase[i]){
         cont=1;
+  
         if(d1>1){
           for(j=i+1;j<i+d1 &&j<d2;j++){
             if(vetorbusca[pos+1]==vetorbase[j]){
@@ -650,6 +674,8 @@ int q6(int numerobase, int numerobusca)
         }
         if(cont==d1){
           qtdOcorrencias=qtdOcorrencias+1;
+          if(d1>1)
+            i=j-1;
           //printf("Rodada %d \n",j);
         }
       }
