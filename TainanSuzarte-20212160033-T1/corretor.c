@@ -63,7 +63,7 @@ void testQ2(){
     qtdDias = -1;
     qtdMeses = -1;
     qtdAnos = -1;
-
+  
     strcpy(datainicial, "01/06/2015");
     strcpy(datafinal, "01/06/2016");
     dma = q2(datainicial, datafinal);
@@ -76,7 +76,7 @@ void testQ2(){
     qtdDias = -1;
     qtdMeses = -1;
     qtdAnos = -1;
-
+    
     strcpy(datainicial,"01/30/2015");
     strcpy(datafinal,"01/06/2016");
     dma = q2(datainicial, datafinal);

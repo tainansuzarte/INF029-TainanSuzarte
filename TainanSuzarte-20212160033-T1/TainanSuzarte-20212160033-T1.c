@@ -79,13 +79,14 @@ DataQuebrada quebraData(char data[]){
   char sDia[3];
 	char sMes[3];
 	char sAno[5];
-	int i;
+	int i, vale=0;
 
 	for (i = 0; data[i] != '/'; i++){
 		sDia[i] = data[i];	
 	}
 	if(i == 1 || i == 2){ // testa se tem 1 ou dois digitos
 		sDia[i] = '\0';  // coloca o barra zero no final
+    vale++;
 	}else 
 		dq.valido = 0;
 	
@@ -100,6 +101,7 @@ DataQuebrada quebraData(char data[]){
 
 	if(i == 1 || i == 2){ // testa se tem 1 ou dois digitos
 		sMes[i] = '\0';  // coloca o barra zero no final
+    vale++;
 	}else
 		dq.valido = 0;
 	
@@ -114,6 +116,7 @@ DataQuebrada quebraData(char data[]){
 
 	if(i == 2 || i == 4){ // testa se tem 2 ou 4 digitos
 		sAno[i] = '\0';  // coloca o barra zero no final
+    vale++;
 	}else
 		dq.valido = 0;
 
@@ -121,7 +124,10 @@ DataQuebrada quebraData(char data[]){
     dq.iMes = atoi(sMes);
     dq.iAno = atoi(sAno); 
 
-	dq.valido = 1;
+	  if(vale==3)
+      dq.valido=1;
+    else
+      dq.valido=0;
     
     return dq;
 }
@@ -147,6 +153,7 @@ int q1(char data[])
     
 
     dq2 = quebraData(data);
+   // printf("Valido: %d - ",dq2.valido);
     if (dq2.valido==0)
       return 0;
     else
@@ -185,12 +192,11 @@ int q1(char data[])
       
 
       
-   //printf("%s - ", data);
+   //printf("%d - ", datavalida);
 
     if(datavalida>0){
-        printf(" ");
         return 1;
-     }else
+     }else if(datavalida==0);
         return 0;
 
 }
