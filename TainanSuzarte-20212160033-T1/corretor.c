@@ -19,11 +19,11 @@ int main(){
     //prindtf("q3\n");
     testQ3(); // 13 testes
     //prdintf("q4\n");
-   testQ4(); // 22 testes
+    testQ4(); // 22 testes
     //prdintf("q5\n");
-   testQ5(); // 10 testes
+    testQ5(); // 10 testes
     //prdintf("q6\n");
-   testQ6(); // 10 testes 
+    testQ6(); // 10 testes 
     
     
 }
@@ -63,7 +63,7 @@ void testQ2(){
     qtdDias = -1;
     qtdMeses = -1;
     qtdAnos = -1;
-  
+
     strcpy(datainicial, "01/06/2015");
     strcpy(datafinal, "01/06/2016");
     dma = q2(datainicial, datafinal);
@@ -76,7 +76,7 @@ void testQ2(){
     qtdDias = -1;
     qtdMeses = -1;
     qtdAnos = -1;
-    
+
     strcpy(datainicial,"01/30/2015");
     strcpy(datafinal,"01/06/2016");
     dma = q2(datainicial, datafinal);
@@ -187,15 +187,14 @@ void testQ2(){
 
 void testQ3(){
     char str[250];
-    
-    strcpy(str,"Renato Líma Novais");
+    strcpy(str,"Renato Lima Novais");
     printf("%d\n",q3(str, 'a', 0) == 3);
     printf("%d\n",q3(str, 'b', 0) == 0);
     printf("%d\n",q3(str, 'l', 1) == 0);
     printf("%d\n",q3(str, 'l', 0) == 1);
     printf("%d\n",q3(str, 'L', 0) == 1);
-    
-    strcpy(str,"Letícia signifiCa fEliCIdADE");
+
+    strcpy(str,"Letícia, signifiCa fEliCIdADE");
     printf("%d\n",q3(str, 'c', 0) == 3);
     printf("%d\n",q3(str, 'C', 0) == 3);
     printf("%d\n",q3(str, 'c', 1) == 1);
@@ -216,7 +215,6 @@ void testQ4(){
     for (i = 0; i<30; i++){
         posicoes[i] = -1;
     }
-    //printf("----Teste 4----\n");
     strcpy(strTexto,"Laboratorio de programacao: para ratos de programação");
     strcpy(strBusca,"rato");
     printf("%d\n",q4(strTexto, strBusca, posicoes) == 2);
@@ -265,7 +263,6 @@ void testQ4(){
 
 
 void testQ5(){
-    //printf("----Teste 5----\n");
     printf("%d\n",q5(345) == 543);
     printf("%d\n",q5(78) == 87);
     printf("%d\n",q5(3) == 3);
@@ -279,7 +276,6 @@ void testQ5(){
 }
 
 void testQ6(){
-    //printf("----Teste 6----\n");
     printf("%d\n",q6(34567368, 3) == 2);
     printf("%d\n",q6(34567368, 4576) == 0);
     printf("%d\n",q6(3539343, 3) == 4);
@@ -292,5 +288,4 @@ void testQ6(){
     printf("%d\n",q6(1234562354, 32) == 0);
 
 }
-      
-        
+    

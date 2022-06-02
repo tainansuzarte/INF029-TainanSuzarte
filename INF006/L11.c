@@ -4,11 +4,10 @@
 
 int main(void){
  
-  int x, quant;
-  float y, estoque, 
+  int x, quant=0, cont=1;
+  float y, estoque; 
 
-  cont=1;
-  quant=0;
+;
   estoque=0;
 
   while(cont==1){
@@ -16,7 +15,7 @@ int main(void){
     scanf("%d", &x);
     getchar();
     printf("Digite o preço unitario do produto:");
-    scanf("%d", &y);
+    scanf("%f", &y);
     getchar();
 
     estoque=estoque+(x*y);
@@ -25,8 +24,8 @@ int main(void){
     scanf("%d", &cont);
     getchar();
     }
-  printf("Total do Estoque = %d\n", estoque);
-  printf("Média de Valor do Estoque = %f \n item", estoque/quant);
+  printf("Total do Estoque = R$ %.2f\n", estoque);
+  printf("Média de Valor do Estoque = R$ %.2f /und \n ", estoque/quant);
   
   getchar();
   return 1;
