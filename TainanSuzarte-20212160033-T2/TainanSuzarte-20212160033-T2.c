@@ -106,7 +106,7 @@ Rertono (int)
 */
 int excluirNumeroDoFinaldaEstrutura(int posicao)
 {
-
+  int retorno=0;
     if (posicao<1 || posicao>10)
         retorno = POSICAO_INVALIDA;
     else
@@ -134,9 +134,6 @@ int excluirNumeroDoFinaldaEstrutura(int posicao)
     }
 
     return retorno;
-    
-    int retorno = SUCESSO;
-    return retorno;
 }
 
 /*
@@ -153,7 +150,54 @@ Rertono (int)
 */
 int excluirNumeroEspecificoDeEstrutura(int posicao, int valor)
 {
-    int retorno = SUCESSO;
+  int retorno=0;
+  int vetaux[1000], tam2, i, j=0;
+  
+    if (posicao<1 || posicao>10)
+        retorno = POSICAO_INVALIDA;
+    else
+    {
+        // testar se existe a estrutura auxiliar
+        if (vetorPrincipal[posicao - 1]!=NULL)
+        {
+            if (vetorPrincipal[posicao - 1][0].espaco!=vetorPrincipal[posicao - 1][0].tam)
+            {
+                tam2=vetorPrincipal[posicao - 1][0].tam;
+                //exclui
+              while(i!=tam2+1){
+                if(vetorPrincipal[posicao-1]->valor!=valor){
+                  vetaux[i]=vetorPrincipal[posicao-1]->valor;
+                  j++;
+                }
+                vetorPrincipal[posicao-1]->valor=NULL;
+                vetorPrincipal[posicao-1]=vetorPrincipal[posicao-1]->next;                
+              }
+
+              for(i=0;i<j;i++){
+                vetorPrincipal[posicao-1]->valor=vetaux[i];
+                vetorPrincipal[posicao-1]=vetorPrincipal[posicao-1]->next;
+              }
+              
+              vetorPrincipal[posicao - 1][0].espaco=tam2-j;
+              printf("%d.",vetorPrincipal[posicao - 1]->espaco);
+              if(j=0){
+                retorno = SUCESSO;
+              }else{
+                retorno=NUMERO_INEXISTENTE;
+              }
+              
+            }
+            else
+            {
+                retorno = ESTRUTURA_AUXILIAR_VAZIA;
+            }
+        }
+        else
+        {
+            retorno = SEM_ESTRUTURA_AUXILIAR;
+        }
+    }
+
     return retorno;
 }
 
@@ -272,6 +316,14 @@ Retorno (No*)
 */
 No *montarListaEncadeadaComCabecote()
 {
+
+                printf("Estrutura %d: \n",posicao - 1);
+
+              j=vetorPrincipal[posicao - 1]->espaco;
+              
+              for(i=0;i<j;i++){
+                printf("Posição %d - Conteudo %d",i,vetorPrincipal[posicao - 1]->valor);
+                vetorPrincipal[posicao - 1]=vetorPrincipal[posicao - 1]->next;
 
     return NULL;
 }

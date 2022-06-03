@@ -60,8 +60,8 @@ int inserirNumeroEstrutura(int posicao, int valor)
               vetorPrincipal[posicao-1]->valor=valor;
               
               vetorPrincipal[posicao - 1][0].espaco=vetorPrincipal[posicao - 1][0].espaco-1;
-              printf("%d.",vetorPrincipal[posicao - 1]->valor);
-              printf("Espaço: %d \n",vetorPrincipal[posicao - 1]->espaco);
+              //printf("%d.",vetorPrincipal[posicao - 1]->valor);
+              //printf("Espaço: %d \n",vetorPrincipal[posicao - 1]->espaco);
               vetorPrincipal[posicao-1]->next=NULL;
               retorno = SUCESSO;
             }
@@ -84,6 +84,7 @@ int inserirNumeroEstrutura(int posicao, int valor)
 int excluirNumeroDoFinaldaEstrutura(int posicao)
 {
     int retorno = SUCESSO;
+    int i,j;
   
     if (posicao<1 || posicao>10)
         retorno = POSICAO_INVALIDA;
@@ -97,7 +98,8 @@ int excluirNumeroDoFinaldaEstrutura(int posicao)
                 //exclui
               
               vetorPrincipal[posicao - 1][0].espaco=vetorPrincipal[posicao - 1][0].espaco+1;
-              printf("%d.",vetorPrincipal[posicao - 1]->espaco);
+              //printf("Novo Espaco %d \n",vetorPrincipal[posicao - 1]->espaco);
+
               retorno = SUCESSO;
             }
             else
@@ -113,6 +115,59 @@ int excluirNumeroDoFinaldaEstrutura(int posicao)
 
     return retorno;
     
+}
+
+int excluirNumeroEspecificoDeEstrutura(int posicao, int valor)
+{
+  int retorno=0;
+  int vetaux[1000], tam2, i, j=0;
+  
+    if (posicao<1 || posicao>10)
+        retorno = POSICAO_INVALIDA;
+    else
+    {
+        // testar se existe a estrutura auxiliar
+        if (vetorPrincipal[posicao - 1]!=NULL)
+        {
+            if (vetorPrincipal[posicao - 1][0].espaco!=vetorPrincipal[posicao - 1][0].tam)
+            {
+                tam2=vetorPrincipal[posicao - 1][0].tam;
+                //exclui
+              while(i!=tam2+1){
+                if(vetorPrincipal[posicao-1]->valor!=valor){
+                  vetaux[i]=vetorPrincipal[posicao-1]->valor;
+                  j++;
+                }
+                vetorPrincipal[posicao-1]->valor=NULL;
+                vetorPrincipal[posicao-1]=vetorPrincipal[posicao-1]->next;                
+              }
+
+              for(i=0;i<j;i++){
+                vetorPrincipal[posicao-1]->valor=vetaux[i];
+                vetorPrincipal[posicao-1]=vetorPrincipal[posicao-1]->next;
+              }
+              
+              vetorPrincipal[posicao - 1][0].espaco=tam2-j;
+              printf("%d.",vetorPrincipal[posicao - 1]->espaco);
+              if(j=0){
+                retorno = SUCESSO;
+              }else{
+                retorno=NUMERO_INEXISTENTE;
+              }
+              
+            }
+            else
+            {
+                retorno = ESTRUTURA_AUXILIAR_VAZIA;
+            }
+        }
+        else
+        {
+            retorno = SEM_ESTRUTURA_AUXILIAR;
+        }
+    }
+
+    return retorno;
 }
 
 
@@ -138,14 +193,16 @@ void testeCriarEstrutura();
 void testeInserirSemNada();
 void testeInserirComEstrutura();
 void testeExcluir();
+void testeExcluirNumeroEspecifico()
 
 int main()
 {
     inicializar();
-    testeInserirSemNada();
-    testeCriarEstrutura();
-    testeInserirComEstrutura();
-    testeExcluir();
+    //testeInserirSemNada();
+    //testeCriarEstrutura();
+    //testeInserirComEstrutura();
+    //testeExcluir();
+    testeExcluirNumeroEspecifico();
     
     /*testeCriarEstrutura();
     testeInserirComEstrutura();
@@ -200,4 +257,17 @@ void testeExcluir()
     printf("%d\n", excluirNumeroDoFinaldaEstrutura(1) == SEM_ESTRUTURA_AUXILIAR);
     printf("%d\n", excluirNumeroDoFinaldaEstrutura(2) == SUCESSO);
     printf("%d\n", excluirNumeroDoFinaldaEstrutura(2) == ESTRUTURA_AUXILIAR_VAZIA);
+}
+
+void testeExcluirNumeroEspecifico()
+{
+    //show_log("testeExcluirNumeroEspecifico()");
+    //###  int excluirNumeroEspecificoDeEstrutura(int posicao, int valor); ###
+    printf("%d\n", criarEstruturaAuxiliar(9, 3) == SUCESSO);
+    printf("%d\n", inserirNumeroEmEstrutura(9, 7) == SUCESSO);
+    printf("%d\n", inserirNumeroEmEstrutura(9, 4) == SUCESSO);
+    printf("%d\n", excluirNumeroEspecificoDeEstrutura(9, 12) == NUMERO_INEXISTENTE);
+    printf("%d\n", excluirNumeroEspecificoDeEstrutura(9, 7) == SUCESSO);
+    printf("%d\n", excluirNumeroEspecificoDeEstrutura(9, 4) == SUCESSO);
+    printf("%d\n", excluirNumeroEspecificoDeEstrutura(1, 2) == SEM_ESTRUTURA_AUXILIAR);
 }
