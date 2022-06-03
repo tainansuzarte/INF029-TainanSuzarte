@@ -37,6 +37,8 @@ int criarEstruturaAuxiliar(int posicao, int tamanho)
 
       vetorPrincipal[posicao - 1][0].tam = tamanho;
       vetorPrincipal[posicao - 1][0].espaco = tamanho;
+
+      
       retorno = SUCESSO;
   }  
 
@@ -69,8 +71,14 @@ int inserirNumeroEmEstrutura(int posicao, int valor)
             if (vetorPrincipal[posicao - 1][0].espaco!=0)
             {
                 //insere
-                vetorPrincipal[posicao - 1][0].espaco=vetorPrincipal[posicao - 1][0].espaco-1;
-                retorno = SUCESSO;
+
+              vetorPrincipal[posicao-1]->valor=valor;
+              
+              vetorPrincipal[posicao - 1][0].espaco=vetorPrincipal[posicao - 1][0].espaco-1;
+              printf("%d.",vetorPrincipal[posicao - 1]->valor);
+              printf("%d.",vetorPrincipal[posicao - 1]->espaco);
+              vetorPrincipal[posicao-1]->next=NULL;
+              retorno = SUCESSO;
             }
             else
             {
@@ -99,6 +107,33 @@ Rertono (int)
 int excluirNumeroDoFinaldaEstrutura(int posicao)
 {
 
+    if (posicao<1 || posicao>10)
+        retorno = POSICAO_INVALIDA;
+    else
+    {
+        // testar se existe a estrutura auxiliar
+        if (vetorPrincipal[posicao - 1]!=NULL)
+        {
+            if (vetorPrincipal[posicao - 1][0].espaco!=vetorPrincipal[posicao - 1][0].tam)
+            {
+                //exclui
+              
+              vetorPrincipal[posicao - 1][0].espaco=vetorPrincipal[posicao - 1][0].espaco+1;
+              printf("%d.",vetorPrincipal[posicao - 1]->espaco);
+              retorno = SUCESSO;
+            }
+            else
+            {
+                retorno = ESTRUTURA_AUXILIAR_VAZIA;
+            }
+        }
+        else
+        {
+            retorno = SEM_ESTRUTURA_AUXILIAR;
+        }
+    }
+
+    return retorno;
     
     int retorno = SUCESSO;
     return retorno;
