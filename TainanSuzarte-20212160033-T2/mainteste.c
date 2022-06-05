@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "EstruturaVetores.h"
+#include "TainanSuzarte-20212160033-T2.h"
 
 void show_log(char *str);
 
@@ -18,18 +18,18 @@ void testeListaEncadeada();
 int main()
 {
     inicializar();
-    testeInserirSemNada();
-    /*testeCriarEstrutura();
+    //testeInserirSemNada();
+    testeCriarEstrutura();
     testeInserirComEstrutura();
     testeExcluir();
     testeExcluirNumeroEspecifico();
     testeListar();
     testeRetornarTodosNumeros();
     testeMudarTamanhoEstrutura();
-    testeListaEncadeada();*/
+    testeListaEncadeada();
     finalizar();
 }
-int ligado = 0;
+int ligado = 1;
 void show_log(char *str)
 {
     if (ligado)

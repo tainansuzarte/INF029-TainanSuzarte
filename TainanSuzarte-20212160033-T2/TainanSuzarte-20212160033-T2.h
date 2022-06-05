@@ -9,20 +9,23 @@ enum { TODAS_ESTRUTURAS_AUXILIARES_VAZIAS = -11, NOVO_TAMANHO_INVALIDO, NUMERO_I
        ESTRUTURA_AUXILIAR_VAZIA, TAMANHO_INVALIDO, SEM_ESPACO_DE_MEMORIA, POSICAO_INVALIDA,
        JA_TEM_ESTRUTURA_AUXILIAR, SEM_ESTRUTURA_AUXILIAR, SEM_ESPACO, SUCESSO };
 
-typedef struct vetorSecundario
+typedef struct vetorAuxiliar
 {
     int aux;
     int valor;
-    int tam;
+    int tamanho;
     int espaco;
-    struct vetorSecundario *next;
+    struct vetorAuxiliar *prox;
 
-} vetorSecundario;
+} vetorAuxiliar;
 
-typedef struct reg {
-    int conteudo;
+typedef struct reg
+{
+    int tamanho;
+    vetorAuxiliar conteudo;
     struct reg *prox;
 } No;
+
 
 int criarEstruturaAuxiliar(int posicao, int tamanho);
 int inserirNumeroEmEstrutura(int posicao, int valor);
