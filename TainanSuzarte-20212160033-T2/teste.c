@@ -243,11 +243,11 @@ int getDadosEstruturaAuxiliar(int posicao, int vetorAux[])
     }
 }
 
-void troca(int *xp, int *yp)
+void substituir(int *a, int *b)
 {
-    int temp = *xp;
-    *xp = *yp;
-    *yp = temp;
+    int temp = *a;
+    *a = *b;
+    *b = temp;
 }
 
 /*
@@ -284,7 +284,7 @@ int getDadosOrdenadosEstruturaAuxiliar(int posicao, int vetorAux[])
         for (int i = 0; i < inseridosVet - 1; i++)
             for (int j = 0; j < inseridosVet - i - 1; j++)
                 if (vetorAux[j] > vetorAux[j + 1])
-                    troca(&vetorAux[j], &vetorAux[j + 1]);
+                    substituir(&vetorAux[j], &vetorAux[j + 1]);
 
         return SUCESSO;
     }
@@ -368,7 +368,7 @@ int getDadosOrdenadosDeTodasEstruturasAuxiliares(int vetorAux[])
     for (int i = 0; i < inseridosVet - 1; i++)
         for (int j = 0; j < inseridosVet - i - 1; j++)
             if (vetorAux[j] > vetorAux[j + 1])
-                troca(&vetorAux[j], &vetorAux[j + 1]);
+                substituir(&vetorAux[j], &vetorAux[j + 1]);
 
     if (inseridosVet == 0)
         return TODAS_ESTRUTURAS_AUXILIARES_VAZIAS;
